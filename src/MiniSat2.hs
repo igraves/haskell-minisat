@@ -239,7 +239,7 @@ foreign import ccall hsminisat_newVecLit
 foreign import ccall hsminisat_deleteVecLit
     :: Ptr CVecLit -> IO ()
 foreign import ccall hsminisat_vecLit_pushVar
-    :: Ptr CVecLit -> CVar -> CInt -> IO ()
+    :: Ptr CVecLit -> CVar -> CUChar -> IO ()
 
 foreign import ccall unsafe hsminisat_newSolver
     :: IO (Ptr CSolver)

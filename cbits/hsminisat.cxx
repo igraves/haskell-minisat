@@ -24,8 +24,8 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include "Solver.h"
-
+#include "core/Solver.h"
+using namespace Minisat;
 extern "C" vec<Lit>* hsminisat_newVecLit(void)
 {
     return new vec<Lit>();
@@ -36,9 +36,9 @@ extern "C" void hsminisat_deleteVecLit(vec<Lit>* p)
     delete p;
 }
 
-extern "C" void hsminisat_vecLit_pushVar(vec<Lit>* p, int var, int sign)
+extern "C" void hsminisat_vecLit_pushVar(vec<Lit>* p, int var, bool sign)
 {
-    p->push(Lit(var, sign));
+    p->push(mkLit(var, sign));
 }
 
 extern "C" Solver* hsminisat_newSolver()
@@ -98,7 +98,7 @@ extern "C" int hsminisat_value(Solver* solver, Var x)
 
 extern "C" int hsminisat_modelValue(Solver* solver, Var v)
 {
-    Lit l(v, false);
+    Lit l = mkLit(v, false);
     return lbool2int(solver->modelValue(l));
 }
 
